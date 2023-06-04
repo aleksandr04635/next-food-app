@@ -23,7 +23,7 @@ export async function getServerSideProps() {
         dish: meal.dishes,
         chef: meal.chef,
       })),
-         revalidate: 10,
+        // revalidate: 10,
     },
   };
 }
