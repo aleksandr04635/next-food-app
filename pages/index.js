@@ -4,15 +4,16 @@ const HomePage = (props) => {
   return <MealList meals={props.mealList} />;
 };
 
-export async function getServerSideProps() {
-     const client = await MongoClient.connect(
-      `mongodb+srv://aleksandr04635:df368ie90@cluster0.vkcz0.mongodb.net/next-food-app?retryWrites=true&w=majority`
-    );
+export async function getServerSideProps(context) {
+  const client = await MongoClient.connect(
+    `mongodb+srv://aleksandr04635:df368ie90@cluster0.vkcz0.mongodb.net/next-food-app?retryWrites=true&w=majority`
+  );
   const db = client.db();
   const mealsCollection = db.collection("meals");
   const meals = await mealsCollection.find().toArray();
-
   client.close();
+
+  //context.meals.setHeader(    "Cache-Control",    "s-maxage=60, stale-while-revalidate=30"  ); // set caching header
 
   return {
     props: {
@@ -23,7 +24,7 @@ export async function getServerSideProps() {
         dish: meal.dishes,
         chef: meal.chef,
       })),
-        // revalidate: 10,
+      // revalidate: 10,
     },
   };
 }
