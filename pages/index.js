@@ -26,6 +26,7 @@ export async function getStaticProps() {
         dish: meal.dishes,
         chef: meal.chef,
       })),
+         revalidate: 10,
     },
   };
 }
