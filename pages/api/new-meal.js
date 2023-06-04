@@ -1,8 +1,8 @@
 import { MongoClient } from "mongodb";
 
 const handler = async (req, res) => {
-  const DATABASE_NAME = "FoodApp";
-  const DATABASE_PASSWORD = "1234567H";
+ // const DATABASE_NAME = "FoodApp";
+ // const DATABASE_PASSWORD = "1234567H";
 
   if (req.method === "POST") {
       const client = await MongoClient.connect(

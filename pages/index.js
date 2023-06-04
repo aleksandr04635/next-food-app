@@ -1,10 +1,20 @@
 import MealList from "../components/MealList";
 import { MongoClient } from "mongodb";
+import Link from "next/link";
+
 const HomePage = (props) => {
-  return <MealList meals={props.mealList} />;
+  return (
+    <div>
+      <div className="bg-yellow-300 px-4 py-2 rounded-lg text-gray-150 font-medium mt-4">
+        <Link href={`/new-meal`}>New meal</Link>
+      </div>
+      <MealList meals={props.mealList} />;
+    </div>
+  );
 };
 
-export async function getServerSideProps(context) {
+//export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const client = await MongoClient.connect(
     `mongodb+srv://aleksandr04635:df368ie90@cluster0.vkcz0.mongodb.net/next-food-app?retryWrites=true&w=majority`
   );
@@ -24,7 +34,7 @@ export async function getServerSideProps(context) {
         dish: meal.dishes,
         chef: meal.chef,
       })),
-      // revalidate: 10,
+      revalidate: 10,
     },
   };
 }
