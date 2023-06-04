@@ -3,6 +3,15 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: "/",
+        headers: [
+          {
+            key: "cache-control",
+            value: "private, s-maxage=60, stale-while-revalidate=30",
+          },
+        ],
+      },
+      {
         source: "/blog/:slug*",
         headers: [
           {
@@ -12,15 +21,6 @@ const nextConfig = {
           {
             key: "x-slug-:slug*", // Matched parameters can be used in the key
             value: "my other custom header value",
-          },
-        ],
-      },
-      {
-        source: "/",
-        headers: [
-          {
-            key: "cache-control",
-            value: "s-maxage=60, stale-while-revalidate=30",
           },
         ],
       },
