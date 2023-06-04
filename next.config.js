@@ -7,12 +7,10 @@ const nextConfig = {
     return [
       {
         source: "/",
-
         headers: [
           {
             key: "Cache-Control",
-
-            value: "s-maxage=1, stale-while-revalidate=59",
+            value: "s-maxage=30, stale-while-revalidate=59",
           },
         ],
       },

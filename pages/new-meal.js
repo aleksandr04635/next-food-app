@@ -30,12 +30,15 @@ const NewMealForm = () => {
         "content-Type": "application/json",
       },
     });
-
     // parses JSON response into native JavaScript objects
     const data = await response.json();
-
     console.log(data);
 
+    const response2 = await fetch("/api/revalidate", {
+      method: "GET",
+    });
+    const data2 = await response2.json();
+    console.log(data2);
     // redirects this page to the Homepage
     router.replace("/");
   };

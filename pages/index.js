@@ -13,17 +13,17 @@ const HomePage = (props) => {
   );
 };
 
-//export async function getServerSideProps(context) {
+//export async function getServerSideProps(context) {   //WORKS normally
 export async function getStaticProps(context) {
   const client = await MongoClient.connect(
-    `mongodb+srv://aleksandr04635:df368ie90@cluster0.vkcz0.mongodb.net/next-food-app?retryWrites=true&w=majority`
+    process.env.MONGODB_URI
   );
   const db = client.db();
   const mealsCollection = db.collection("meals");
   const meals = await mealsCollection.find().toArray();
   client.close();
 
-  //context.meals.setHeader(    "Cache-Control",    "s-maxage=60, stale-while-revalidate=30"  ); // set caching header
+  // context.meals.setHeader(    "Cache-Control",    "s-maxage=60, stale-while-revalidate=30"  ); // set caching header
 
   return {
     props: {
